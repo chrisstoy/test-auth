@@ -1,0 +1,20 @@
+meta {
+  name: signin
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{apiHost}}/auth/session
+  body: none
+  auth: none
+}
+
+script:post-response {
+  const cookies = res.getHeader('set-cookie');
+  
+  if(cookies) {
+    bru.setVar("cookie", cookies.join('; '));
+  }
+  
+}

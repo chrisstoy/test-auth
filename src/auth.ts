@@ -40,4 +40,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  session: {
+    strategy: 'jwt',
+  },
+  debug: true,
+  callbacks: {
+    jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = user?.id;
+      }
+      return token;
+    },
+    async session({ session, token, user }) {
+      session.user.id = token?.sub || user?.id;
+      // session.user.role = token.role;
+      return Promise.resolve(session);
+    },
+    authorized: async ({ auth, request }) => {
+      if (!request.nextUrl.pathname.includes('/api')) {
+        return true;
+      }
+      return !!auth;
+    },
+  },
 });
