@@ -2,6 +2,7 @@ import { Card } from '@/_components/Card';
 import { ClientFetchPrivateAPISession } from '@/_components/ClientFetchPrivateAPISession';
 import { ClientFetchPublicAPISession } from '@/_components/ClientFetchPublicAPISession';
 import { ClientShowSession } from '@/_components/ClientShowSession';
+import { ServerFetchPrivateAPISession } from '@/_components/ServerFetchPrivateAPISession';
 import { ServerShowSession } from '@/_components/ServerShowSession';
 import { auth } from '@/auth';
 import Link from 'next/link';
@@ -44,6 +45,9 @@ export default async function HomePage() {
           </Card>
           <Card>
             <ClientShowSession></ClientShowSession>
+          </Card>
+          <Card>
+            <ServerFetchPrivateAPISession></ServerFetchPrivateAPISession>
           </Card>
           <Card>
             <ClientFetchPublicAPISession></ClientFetchPublicAPISession>

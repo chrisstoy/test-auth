@@ -1,9 +1,8 @@
 import { RouteContext } from '@/types';
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { respondWithError } from '../../errors';
 import { validateAuthentication } from '../../validateAuthentication';
-import { auth } from '@/auth';
-import { z } from 'zod';
 
 const QueryParamsSchema = z.object({
   foo: z.string(),
@@ -13,9 +12,8 @@ const QueryParamsSchema = z.object({
 
 export async function GET(req: NextRequest, { params }: RouteContext) {
   try {
-    await validateAuthentication();
+    const session = await validateAuthentication();
 
-    const session = await auth();
     const queryParams = QueryParamsSchema.parse(
       Object.fromEntries(req.nextUrl.searchParams.entries())
     );

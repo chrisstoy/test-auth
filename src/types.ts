@@ -3,5 +3,5 @@ export type RouteParams = {
 };
 
 export type RouteContext = {
-  params: { [key: string]: string | string[] | undefined };
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
 };
