@@ -1,5 +1,4 @@
 import { fetchFromServer } from '@/app/api/api';
-import { auth } from '@/auth';
 import { AuthError } from 'next-auth';
 import { headers } from 'next/headers';
 import { Suspense } from 'react';
