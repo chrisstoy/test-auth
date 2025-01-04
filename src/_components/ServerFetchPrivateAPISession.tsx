@@ -1,5 +1,7 @@
 import { fetchFromServer } from '@/app/api/api';
+import { auth } from '@/auth';
 import { AuthError } from 'next-auth';
+import { headers } from 'next/headers';
 import { Suspense } from 'react';
 
 const getData = async () => {
@@ -20,9 +22,15 @@ const getData = async () => {
 };
 
 export async function ServerFetchPrivateAPISession() {
+  const headersList = await headers();
+  const results = await getData();
+
   return (
     <>
       <h2 className="text-xl mx-2">Server Component Fetch Private API</h2>
+      <pre className="mx-4 overflow-hidden w-full">
+        Cookie: {headersList.get('Cookie')}
+      </pre>
       <Suspense
         fallback={
           <div className="text-secondary-content m-2 text-center">
@@ -30,14 +38,9 @@ export async function ServerFetchPrivateAPISession() {
           </div>
         }
       >
-        <Content results={await getData()} />
+        <h1>Fetch Results:</h1>
+        <pre className="mx-4 text-wrap">{JSON.stringify(results, null, 2)}</pre>
       </Suspense>
     </>
-  );
-}
-
-async function Content({ results }: { results: string }) {
-  return (
-    <pre className="mx-4 text-wrap">{JSON.stringify(results, null, 2)}</pre>
   );
 }
