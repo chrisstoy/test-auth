@@ -9,7 +9,7 @@ export function ClientFetchPrivateAPISession() {
   const handleFetch = async () => {
     setResults('Loading...');
     try {
-      const response = await fetch('/api/private');
+      const response = await fetch('/api/private/5678?foo=bar&bar=baz');
       if (response.status !== 200) {
         throw new AuthError('Unauthorized', { status: response.status });
       }

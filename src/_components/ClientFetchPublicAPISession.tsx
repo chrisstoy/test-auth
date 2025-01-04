@@ -7,7 +7,7 @@ export function ClientFetchPublicAPISession() {
 
   const handleFetch = async () => {
     setResults('Loading...');
-    const response = await fetch('/api/public');
+    const response = await fetch('/api/public/1234?foo=bar&bar=baz&foo=bim');
     const data = await response.json();
     setResults(data);
   };
